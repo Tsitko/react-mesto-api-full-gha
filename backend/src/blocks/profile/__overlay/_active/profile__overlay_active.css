@@ -1,0 +1,28 @@
+.profile__overlay_active {
+  display: flex;
+  background-color: black;
+  background-image: url("../../../../images/Edit.svg");
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  opacity: 0;
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+}
+
+.profile__overlay_active:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 1s;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile__overlay_active {
+    width: 128.75px;
+    height: 127.75px;
+  }
+}
