@@ -1,9 +1,0 @@
-.form__validation-text_visible{
-  display: flex;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 15px;
-  color: #FF0000;
-  margin: -29px 0 -20px 0;
-  max-height: 15px;
-}
