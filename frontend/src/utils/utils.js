@@ -8,9 +8,9 @@ export const validationSettings = {
 };
 
 export const data = {
-  baseUrl: "https://api.mesto-russia.nomoreparties.co",
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-65",
   headers: {
-   // authorization: "2f741d91-5f99-4a03-b207-7e63a8ddfd00",
+    authorization: "2f741d91-5f99-4a03-b207-7e63a8ddfd00",
     "Content-Type": "application/json",
   },
 };
