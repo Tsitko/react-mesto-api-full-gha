@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.50.70
+IP 158.160.50.70
 
 Frontend https://mesto-russia.nomoreparties.co/
 
