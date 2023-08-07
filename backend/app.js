@@ -8,7 +8,6 @@ const regEx = require('./utils/constants');
 require('dotenv').config();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-
 const { PORT = 3000 } = process.env;
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
@@ -55,6 +54,7 @@ app.use('/cards', require('./routes/cards'));
 
 app.use('*', (_, __, next) => next(new NotFoundError('Нет такой страницы')));
 
+app.use(errorLogger);
 app.use(errors());
 
 app.use((err, _, res, next) => {
