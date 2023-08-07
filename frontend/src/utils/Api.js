@@ -1,8 +1,8 @@
-import { data } from "./utils";
+
 
 class Api {
   constructor(data) {
-    this._baseUrl = data.baseUrl;
+    this._baseUrl = data.url;
     this._headers = data.headers;
   }
 
@@ -64,12 +64,18 @@ class Api {
   }
 
   changeLikeCardStatus(id, method) {
-    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: method,
       headers: this._headers,
     }).then((res) => this._handleResponse(res));
   }
 }
 
-const api = new Api(data);
+const api = new Api({
+  url: "https://api.mesto-russia.nomoreparties.co",
+  headers: {
+    "Content-Type": "application/json",
+    authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  },
+});
 export default api;

@@ -110,7 +110,12 @@ function App() {
     api
       .changeLikeCardStatus(id, method)
       .then((newCard) => {
-        setCards((cards) => cards.map((c) => (c._id === id ? newCard : c)));
+        if (cards.data){
+          setCards((cards) => cards.data.map((c) => (c._id === id ? newCard : c)));
+        } else{
+          setCards((cards) => cards.map((c) => (c._id === id ? newCard : c)));
+        }
+        
       })
       .catch((err) => {
         console.log("2 Ошибка ===> ", err);
@@ -121,7 +126,12 @@ function App() {
     api
       .deleteCard(id)
       .then((newCard) => {
-        const newArrCards = cards.filter((c) => c._id !== id);
+        let newArrCards = [];
+        if(cards.data){
+          newArrCards = cards.data.filter((c) => c._id !== id);
+        } else{
+          newArrCards = cards.filter((c) => c._id !== id);
+        }
         setCards(newArrCards);
       })
       .catch((err) => {
@@ -160,7 +170,15 @@ function App() {
         link: e.link,
       })
       .then((res) => {
-        setCards([res, ...cards]);
+        let cardsData = cards;
+        let resData = res;
+        if(cards.data){
+          cardsData = cards.data;
+        }
+        if(res.data){
+          resData = res.data;
+        }
+        setCards([resData, ...cardsData]);
         closeAllPopups();
       })
       .catch((err) => {

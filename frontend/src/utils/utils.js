@@ -10,7 +10,7 @@ export const validationSettings = {
 export const data = {
   baseUrl: "https://api.mesto-russia.nomoreparties.co",
   headers: {
-    //authorization: "2f741d91-5f99-4a03-b207-7e63a8ddfd00",
+    Accept: "application/json",
     "Content-Type": "application/json",
   },
 };
