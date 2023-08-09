@@ -1,3 +1,4 @@
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -5,14 +6,12 @@ const BadRequestError = require('../middlewares/errors/BadRequestError');
 const NotFoundError = require('../middlewares/errors/NotFoundError');
 const ConflictError = require('../middlewares/errors/ConflictError');
 
-const { JWT_SECRET = 'dev-key' } = process.env;
-
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-strong-secret', { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(next);
