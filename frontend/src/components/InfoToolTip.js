@@ -9,7 +9,7 @@ function InfoToolTip(props) {
     e.preventDefault();
     props.onClose();
     if (props.isSuccess) {
-      navigate("/", { replace: true });
+      navigate("/sign-in", { replace: true });
     }
   }
   return (

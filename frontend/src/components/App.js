@@ -59,16 +59,33 @@ function App() {
     img: "",
   });
 
-  useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getUserInfo()])
-      .then(([cards, userInfo]) => {
-        setCards(cards);
-        setCurrentUser(userInfo);
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      api
+      .getUserInfo()
+      .then((userData) => {
+        console.log(userData);
+        setCurrentUser(userData);
       })
       .catch((err) => {
-        console.log("1 Ошибка ===> ", err);
+        console.log(err);
       });
-  }, []);
+    }
+  }, [isLoggedIn, isSuccess]);
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      api
+      .getInitialCards()
+      .then((initialCards) => {
+        console.log(initialCards);
+        setCards(initialCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  }, [isLoggedIn, isSuccess]);
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
@@ -172,7 +189,6 @@ function App() {
     auth
       .register(email, password)
       .then((res) => {
-        setIsLoggedIn(true);
         setInfoToolTipPopupOpen(true);
         setIsSuccess(true);
       })
@@ -192,8 +208,8 @@ function App() {
         localStorage.setItem("jwt", res.token);
         setIsLoggedIn(true);
         setIsSuccess(true);
-        setInfoToolTipPopupOpen(true);
         setEmail(email);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         if (err === 400) {
@@ -213,7 +229,7 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           setIsLoggedIn(true);
-          setEmail(res.data.email);
+          setEmail(res.email);
           navigate("/", { replace: true });
         })
         .catch((err) => {
