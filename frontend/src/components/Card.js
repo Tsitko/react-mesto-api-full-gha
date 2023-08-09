@@ -5,7 +5,6 @@ import trashImage from "../images/Trash.svg";
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner === currentUser._id;
-  console.log(card.likes);
   const isLiked = card.likes.some((i) => i === currentUser._id);
   const id = card._id;
   const likes = card.likes;

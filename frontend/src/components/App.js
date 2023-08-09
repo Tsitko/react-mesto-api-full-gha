@@ -190,7 +190,6 @@ function App() {
       .login(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        console.log(localStorage.getItem("jwt"));
         setIsLoggedIn(true);
         setIsSuccess(true);
         setInfoToolTipPopupOpen(true);
