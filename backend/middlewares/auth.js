@@ -1,8 +1,6 @@
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET = 'super-strong-secret' } = process.env;
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('./errors/UnauthorizedError');
-
-const { JWT_SECRET = 'super-strong-secret' } = process.env;
 
 module.exports = (req, _, next) => {
   const { authorization } = req.headers;
