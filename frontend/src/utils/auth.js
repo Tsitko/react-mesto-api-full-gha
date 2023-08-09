@@ -43,6 +43,7 @@ export const login = (email, password) => {
 };
 
 export const checkToken = (jwt) => {
+  console.log(jwt);
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
