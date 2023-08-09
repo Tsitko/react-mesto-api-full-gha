@@ -35,15 +35,12 @@ export const login = (email, password) => {
   })
     .then(checkResponse)
     .then((data) => {
-      if (data.token) {
         localStorage.setItem("jwt", data.token);
         return data;
-      }
     })  
 };
 
 export const checkToken = (jwt) => {
-  console.log(jwt);
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
