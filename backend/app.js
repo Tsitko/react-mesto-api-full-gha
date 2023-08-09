@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
+const cors = require('cors');
 const { errors, celebrate, Joi } = require('celebrate');
 const NotFoundError = require('./middlewares/errors/NotFoundError');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const regEx = require('./utils/constants');
-require('dotenv').config();
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -14,6 +15,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 const app = express();
 
 app.use(express.json());
+
+app.use(cors({ origin: 'https://mesto-russia.nomoreparties.co' }));
 
 app.use(requestLogger);
 

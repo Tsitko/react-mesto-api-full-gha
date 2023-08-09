@@ -11,18 +11,8 @@ function Main({
   onCardLike,
   onCardDelete,
 }) {
-  let cardsElements = [];
-  if (cards.data){
-    cardsElements = cards.data.map((card) => ({ card: card, key: card._id }));
-  }
-  else{
-    cardsElements = cards.map((card) => ({ card: card, key: card._id }));
-  }
-  
-  let currentUser = useContext(CurrentUserContext);
-  if(currentUser.data){
-    currentUser = currentUser.data;
-  }
+  const cardsElements = cards.map((card) => ({ card: card, key: card._id }));
+  const currentUser = useContext(CurrentUserContext);
   const [isOnImage, setIsOnImage] = useState(false);
 
   function handleOnImageMove() {

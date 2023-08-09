@@ -104,18 +104,13 @@ function App() {
 
   function handleCardLikeDislike({ likes, id }) {
     const isLiked = likes.some((i) => {
-      return i._id === currentUser._id;
+      return i === currentUser._id;
     });
     const method = isLiked ? "DELETE" : "PUT";
     api
       .changeLikeCardStatus(id, method)
       .then((newCard) => {
-        if (cards.data){
-          setCards((cards) => cards.data.map((c) => (c._id === id ? newCard : c)));
-        } else{
-          setCards((cards) => cards.map((c) => (c._id === id ? newCard : c)));
-        }
-        
+        setCards((cards) => cards.map((c) => (c._id === id ? newCard : c)));
       })
       .catch((err) => {
         console.log("2 Ошибка ===> ", err);
@@ -126,12 +121,7 @@ function App() {
     api
       .deleteCard(id)
       .then((newCard) => {
-        let newArrCards = [];
-        if(cards.data){
-          newArrCards = cards.data.filter((c) => c._id !== id);
-        } else{
-          newArrCards = cards.filter((c) => c._id !== id);
-        }
+        const newArrCards = cards.filter((c) => c._id !== id);
         setCards(newArrCards);
       })
       .catch((err) => {
@@ -170,15 +160,7 @@ function App() {
         link: e.link,
       })
       .then((res) => {
-        let cardsData = cards;
-        let resData = res;
-        if(cards.data){
-          cardsData = cards.data;
-        }
-        if(res.data){
-          resData = res.data;
-        }
-        setCards([resData, ...cardsData]);
+        setCards([res, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {
@@ -208,6 +190,7 @@ function App() {
       .login(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
+        console.log(localStorage.getItem("jwt"));
         setIsLoggedIn(true);
         setIsSuccess(true);
         setInfoToolTipPopupOpen(true);

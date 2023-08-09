@@ -3,18 +3,11 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 import trashImage from "../images/Trash.svg";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
-  if(card.data){
-    card = card.data;
-  }
-  let currentUser = useContext(CurrentUserContext);
-  if(currentUser.data){
-    currentUser = currentUser.data;
-  }
+  const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner === currentUser._id;
-  let isLiked = false;
-  isLiked = card.likes.some((i) => i._id === currentUser._id);
+  console.log(card.likes);
+  const isLiked = card.likes.some((i) => i === currentUser._id);
   const id = card._id;
-  console.log(id);
   const likes = card.likes;
   const cardLikeButtonClassName = `element__like ${
     isLiked && "element__like_active"
